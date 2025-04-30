@@ -34,7 +34,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -43,12 +43,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -160,7 +160,299 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: pumpkin_dude_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 16
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: 7, y: -14}
+        - {x: 7, y: -9}
+        - {x: 8, y: -8}
+        - {x: 8, y: 0}
+        - {x: 0, y: 7}
+        - {x: -3, y: 7}
+        - {x: -5, y: 5}
+        - {x: -5, y: 3}
+        - {x: -8, y: 0}
+        - {x: -8, y: -8}
+        - {x: -7, y: -9}
+        - {x: -7, y: -16}
+        - {x: 5, y: -16}
+      tessellationDetail: 1
+      bones: []
+      spriteID: 19c96a2440643454a8a97bb8c394daf7
+      internalID: -303663489
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pumpkin_dude_1
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 0
+        width: 16
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: 8, y: -1}
+        - {x: 5, y: 3}
+        - {x: 3, y: 4}
+        - {x: 0, y: 7}
+        - {x: -2, y: 7}
+        - {x: -4, y: 5}
+        - {x: -4, y: 3}
+        - {x: -8, y: -1}
+        - {x: -8, y: -9}
+        - {x: -7, y: -10}
+        - {x: -7, y: -16}
+        - {x: 6, y: -16}
+        - {x: 7, y: -15}
+        - {x: 7, y: -10}
+        - {x: 8, y: -9}
+      tessellationDetail: 1
+      bones: []
+      spriteID: b94dfaaa4973bc74294444feaac45ab1
+      internalID: -1895449197
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pumpkin_dude_2
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 16
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: 5, y: 1}
+        - {x: 3, y: 1}
+        - {x: 0, y: 4}
+        - {x: -4, y: 4}
+        - {x: -8, y: -2}
+        - {x: -8, y: -11}
+        - {x: -7, y: -12}
+        - {x: -7, y: -16}
+        - {x: 7, y: -16}
+        - {x: 7, y: -12}
+        - {x: 8, y: -11}
+        - {x: 8, y: -2}
+      tessellationDetail: 1
+      bones: []
+      spriteID: 29d4a18d9651b184e969421905d360f9
+      internalID: 1352087861
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pumpkin_dude_3
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 0
+        width: 16
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: 8, y: -1}
+        - {x: 4, y: 3}
+        - {x: 1, y: 5}
+        - {x: -4, y: 5}
+        - {x: -5, y: 3}
+        - {x: -8, y: -1}
+        - {x: -8, y: -9}
+        - {x: -7, y: -10}
+        - {x: -7, y: -16}
+        - {x: 6, y: -16}
+        - {x: 7, y: -15}
+        - {x: 7, y: -10}
+        - {x: 8, y: -9}
+      tessellationDetail: 1
+      bones: []
+      spriteID: 000b3d84c2b7feb4f89008f9a4cc2b57
+      internalID: -812323875
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pumpkin_dude_4
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 16
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: 7, y: -14}
+        - {x: 7, y: -8}
+        - {x: 8, y: -7}
+        - {x: 8, y: 1}
+        - {x: 4, y: 5}
+        - {x: 3, y: 5}
+        - {x: 1, y: 7}
+        - {x: -4, y: 7}
+        - {x: -5, y: 5}
+        - {x: -8, y: 1}
+        - {x: -8, y: -7}
+        - {x: -7, y: -8}
+        - {x: -7, y: -15}
+        - {x: -6, y: -16}
+        - {x: -2, y: -16}
+        - {x: -1, y: -15}
+        - {x: 2, y: -16}
+        - {x: 5, y: -16}
+      tessellationDetail: 1
+      bones: []
+      spriteID: 9dc9409ad869bf64488edca36e6b2915
+      internalID: 1707167002
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pumpkin_dude_5
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 0
+        width: 16
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: 8, y: -13}
+        - {x: 7, y: -7}
+        - {x: 8, y: -6}
+        - {x: 8, y: 2}
+        - {x: 0, y: 9}
+        - {x: -3, y: 9}
+        - {x: -5, y: 7}
+        - {x: -5, y: 5}
+        - {x: -8, y: 2}
+        - {x: -8, y: -7}
+        - {x: -7, y: -9}
+        - {x: -8, y: -10}
+        - {x: -8, y: -15}
+        - {x: -7, y: -16}
+        - {x: -4, y: -16}
+        - {x: 0, y: -14}
+        - {x: 1, y: -15}
+        - {x: 6, y: -15}
+      tessellationDetail: 1
+      bones: []
+      spriteID: df72126157f978341befdfe63c555388
+      internalID: 1417807210
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pumpkin_dude_6
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 16
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: 8, y: 1}
+        - {x: 5, y: 5}
+        - {x: 3, y: 6}
+        - {x: 0, y: 9}
+        - {x: -2, y: 9}
+        - {x: -4, y: 7}
+        - {x: -4, y: 5}
+        - {x: -8, y: 1}
+        - {x: -8, y: -7}
+        - {x: -7, y: -8}
+        - {x: -8, y: -11}
+        - {x: -8, y: -14}
+        - {x: -6, y: -16}
+        - {x: -2, y: -16}
+        - {x: -1, y: -15}
+        - {x: -1, y: -16}
+        - {x: 5, y: -16}
+        - {x: 7, y: -14}
+        - {x: 7, y: -8}
+        - {x: 8, y: -7}
+      tessellationDetail: 1
+      bones: []
+      spriteID: 6529690b12407ef43bf47e370c1160b4
+      internalID: 1455799936
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pumpkin_dude_7
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 0
+        width: 16
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: 8, y: -9}
+        - {x: 8, y: 0}
+        - {x: 5, y: 3}
+        - {x: 3, y: 3}
+        - {x: 0, y: 6}
+        - {x: -4, y: 6}
+        - {x: -5, y: 4}
+        - {x: -8, y: 0}
+        - {x: -8, y: -9}
+        - {x: -7, y: -10}
+        - {x: -7, y: -14}
+        - {x: -6, y: -16}
+        - {x: 5, y: -16}
+        - {x: 7, y: -14}
+        - {x: 7, y: -10}
+      tessellationDetail: 1
+      bones: []
+      spriteID: a7cb549259ebf6d41bc0e818b65cf2f2
+      internalID: 1987197609
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -171,7 +463,15 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      pumpkin_dude_0: -303663489
+      pumpkin_dude_1: -1895449197
+      pumpkin_dude_2: 1352087861
+      pumpkin_dude_3: -812323875
+      pumpkin_dude_4: 1707167002
+      pumpkin_dude_5: 1417807210
+      pumpkin_dude_6: 1455799936
+      pumpkin_dude_7: 1987197609
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
