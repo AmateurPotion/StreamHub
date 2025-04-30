@@ -1,3 +1,4 @@
+using StreamHub.Prefabs.Character;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -5,20 +6,23 @@ namespace StreamHub.Scenes.World
 {
   public class Player : MonoBehaviour
   {
-    public Vector2 direction;
-    public float speed;
-    
-    [SerializeField]
-    private Rigidbody2D body;
+    public Character character;
 
-    private void FixedUpdate()
+    public Vector2 Direction
     {
-      body.velocity = direction * speed;
+      get => character.direction;
+      set => character.direction = value;
+    }
+
+    public float Speed
+    {
+      get => character.speed;
+      set => character.speed = value;
     }
 
     private void OnMove(InputValue value)
     {
-      direction = value.Get<Vector2>();
+      Direction = value.Get<Vector2>();
     }
   }
 }
