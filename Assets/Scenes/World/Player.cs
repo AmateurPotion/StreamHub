@@ -1,28 +1,60 @@
+using Cinemachine;
 using StreamHub.Prefabs.Character;
+using StreamHub.Scenes.PersonalWorld;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Tilemaps;
 
 namespace StreamHub.Scenes.World
 {
   public class Player : MonoBehaviour
   {
     public Character character;
+    public Vector2 direction;
+    public float additionalSpeed = 0;
 
-    public Vector2 Direction
+    public float CameraSize
     {
-      get => character.direction;
-      set => character.direction = value;
+      get => camera.m_Lens.OrthographicSize;
+      set => camera.m_Lens.OrthographicSize = value;
     }
+    [SerializeField]
+    private Rigidbody2D body;
+    [SerializeField]
+    private new CinemachineVirtualCamera camera;
 
     public float Speed
     {
-      get => character.speed;
-      set => character.speed = value;
+      get => character.speed + additionalSpeed;
+      set => additionalSpeed = value - character.speed;
+    }
+
+    private void Update()
+    {
+      if (Input.GetAxis("Mouse ScrollWheel") > 0 && CameraSize < 10) 
+        CameraSize = Mathf.Lerp(CameraSize, 10, Time.deltaTime * 5);
+      if (Input.GetAxis("Mouse ScrollWheel") < 0 && CameraSize > 2)
+        CameraSize = Mathf.Lerp(CameraSize, 2, Time.deltaTime * 5);
+    }
+
+    private void FixedUpdate()
+    {
+      var floorMap = WorldManager.Instance.map.Floors;
+      
+      bool canMoveX = floorMap.GetTile(floorMap.WorldToCell(transform.position + new Vector3(direction.x, 0))) != null,
+        canMoveY = floorMap.GetTile(floorMap.WorldToCell(transform.position + new Vector3(0, direction.y))) != null;
+      
+      body.AddForce(new Vector2(canMoveX ? direction.x : 0, 
+          canMoveY ? direction.y : 0) * Speed,
+        ForceMode2D.Impulse);
+      
+      if(!canMoveX) body.velocity = new Vector2(0, body.velocity.y);
+      if(!canMoveY) body.velocity = new Vector2(body.velocity.x, 0);
     }
 
     private void OnMove(InputValue value)
     {
-      Direction = value.Get<Vector2>();
+       direction = value.Get<Vector2>();
     }
   }
 }

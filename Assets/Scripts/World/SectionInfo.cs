@@ -8,6 +8,7 @@ namespace StreamHub.World
   {
     public TileBase wallTile;
     public TileBase floorTile;
+    public TileBase airTile;
     public int width;
     public int height;
   }
