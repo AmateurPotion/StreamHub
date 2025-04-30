@@ -31,23 +31,23 @@ namespace StreamHub.Scenes.PersonalWorld
                 // Set Floor Tile
                 for (var x = sectionPosition.x; x < sectionInfo.width + sectionPosition.x; x++)
                 {
-                    floorPositions.Add(new Vector3Int(x, y, 0));
+                    floorPositions.Add(new Vector3Int(x, y));
                     floorTiles.Add(sectionInfo.floorTile);
                 }
                 
                 // Set Left/Right Border Wall Tile
-                structurePositions.Add(new Vector3Int(sectionPosition.x, y, 0));
+                structurePositions.Add(new Vector3Int(sectionPosition.x, y));
                 structureTiles.Add(sectionInfo.wallTile);
-                structurePositions.Add(new Vector3Int(sectionPosition.x + sectionInfo.width, y, 0));
+                structurePositions.Add(new Vector3Int(sectionPosition.x + sectionInfo.width - 1, y));
                 structureTiles.Add(sectionInfo.wallTile);
             }
             
             // Set Top/Bottom Border Wall Tile
             for (var x = sectionPosition.x; x < sectionInfo.width + sectionPosition.x; x++)
             {
-                structurePositions.Add(new Vector3Int(x, sectionPosition.y, 0));
+                structurePositions.Add(new Vector3Int(x, sectionPosition.y));
                 structureTiles.Add(sectionInfo.wallTile);
-                structurePositions.Add(new Vector3Int(x, sectionPosition.y + sectionInfo.height, 0));
+                structurePositions.Add(new Vector3Int(x, sectionPosition.y + sectionInfo.height - 1));
                 structureTiles.Add(sectionInfo.wallTile);
             }
             
