@@ -1,8 +1,8 @@
 using System.Collections.Generic;
-using Cinemachine;
 using StreamHub.Prefabs.Character;
 using StreamHub.Prefabs.Interactable;
 using StreamHub.Scenes.PersonalWorld;
+using StreamHub.Util;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -13,16 +13,25 @@ namespace StreamHub.Scenes.World
     public Character character;
     public Vector2 direction;
     public float additionalSpeed = 0;
+    [GetSet("Hp")] private int hp = 6;
+    public int maxHp = 6;
 
     public float CameraSize
     {
-      get => camera.m_Lens.OrthographicSize;
-      set => camera.m_Lens.OrthographicSize = value;
+      get => camera.orthographicSize;
+      set => camera.orthographicSize = value;
     }
 
     [SerializeField] private List<InteractableObject> focusedObjects = new();
     [SerializeField] private Rigidbody2D body;
-    [SerializeField] private new CinemachineVirtualCamera camera;
+
+    [SerializeField] [Header("Camera")] private new Camera camera;
+
+    public int Hp
+    {
+      get => hp;
+      set => hp = value < 0 ? 0 : value > maxHp ? maxHp : value;
+    }
 
     public float Speed
     {
@@ -31,7 +40,13 @@ namespace StreamHub.Scenes.World
     }
 
     public InteractableObject Focused => focusedObjects.Count > 0 ? focusedObjects[0] : null;
+    [SerializeField] private CompositeCollider2D collider;
 
+    private void Awake()
+    {
+      collider.GenerateGeometry();
+    }
+    
     private void Update()
     {
       if (Input.GetAxis("Mouse ScrollWheel") > 0 && CameraSize < 10) 
@@ -53,6 +68,10 @@ namespace StreamHub.Scenes.World
       
       if(!canMoveX) body.velocity = new Vector2(0, body.velocity.y);
       if(!canMoveY) body.velocity = new Vector2(body.velocity.x, 0);
+
+      // Camera Tracking
+      camera.transform.position = Vector3.Lerp(camera.transform.position,
+        new Vector3(transform.position.x, transform.position.y, camera.transform.position.z), Time.deltaTime * 5);
     }
 
     private void OnMove(InputValue value)
