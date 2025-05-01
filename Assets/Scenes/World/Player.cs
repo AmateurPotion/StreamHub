@@ -1,9 +1,10 @@
 using Cinemachine;
 using StreamHub.Prefabs.Character;
 using StreamHub.Scenes.PersonalWorld;
+using StreamHub.Scenes.PersonalWorld.Interactable;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Tilemaps;
 
 namespace StreamHub.Scenes.World
 {
@@ -18,15 +19,27 @@ namespace StreamHub.Scenes.World
       get => camera.m_Lens.OrthographicSize;
       set => camera.m_Lens.OrthographicSize = value;
     }
-    [SerializeField]
-    private Rigidbody2D body;
-    [SerializeField]
-    private new CinemachineVirtualCamera camera;
+
+    [SerializeField] private InteractableObject currentTarget;
+    [SerializeField] private Rigidbody2D body;
+    [SerializeField] private new CinemachineVirtualCamera camera;
+    [SerializeField] private TMP_Text descriptionText;
 
     public float Speed
     {
       get => character.speed + additionalSpeed;
       set => additionalSpeed = value - character.speed;
+    }
+
+    public InteractableObject CurrentTarget
+    {
+      get => currentTarget;
+      set
+      {
+        if (currentTarget != null) currentTarget.Highlight = false;
+
+        currentTarget = value;
+      }
     }
 
     private void Update()
