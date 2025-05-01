@@ -17,12 +17,9 @@ namespace StreamHub.Scenes.PersonalWorld
         public Tilemap Structures => layers[1];
         [SerializeField] 
         private CinemachineConfiner2D confiner;
-        [SerializeField, Header("Test Build")]
-        private SectionInfo testSectionInfo;
 
         private void Start()
         {
-            CreateSection(new Vector2Int(0, 0), testSectionInfo);
         }
 
         public void CreateSection(Vector2Int sectionPosition, SectionInfo sectionInfo)

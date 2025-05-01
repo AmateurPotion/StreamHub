@@ -1,8 +1,8 @@
+using System.Collections.Generic;
 using Cinemachine;
 using StreamHub.Prefabs.Character;
+using StreamHub.Prefabs.Interactable;
 using StreamHub.Scenes.PersonalWorld;
-using StreamHub.Scenes.PersonalWorld.Interactable;
-using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -20,10 +20,9 @@ namespace StreamHub.Scenes.World
       set => camera.m_Lens.OrthographicSize = value;
     }
 
-    [SerializeField] private InteractableObject currentTarget;
+    [SerializeField] private List<InteractableObject> focusedObjects = new();
     [SerializeField] private Rigidbody2D body;
     [SerializeField] private new CinemachineVirtualCamera camera;
-    [SerializeField] private TMP_Text descriptionText;
 
     public float Speed
     {
@@ -31,16 +30,7 @@ namespace StreamHub.Scenes.World
       set => additionalSpeed = value - character.speed;
     }
 
-    public InteractableObject CurrentTarget
-    {
-      get => currentTarget;
-      set
-      {
-        if (currentTarget != null) currentTarget.Highlight = false;
-
-        currentTarget = value;
-      }
-    }
+    public InteractableObject Focused => focusedObjects.Count > 0 ? focusedObjects[0] : null;
 
     private void Update()
     {
@@ -68,6 +58,40 @@ namespace StreamHub.Scenes.World
     private void OnMove(InputValue value)
     {
        direction = value.Get<Vector2>();
+    }
+
+    private void OnInteract()
+    {
+      if (Focused != null) Focused.Interact(this);
+    }
+
+    public void AddFocus(InteractableObject interactableObject)
+    {
+      var previousTarget = Focused;
+      if (previousTarget != null) previousTarget.Highlight = false;
+
+      WorldManager.Instance.panel.OpenInteractionPanel(transform.position, interactableObject.Title,
+        interactableObject.Description);
+      interactableObject.Highlight = true;
+      focusedObjects.Add(interactableObject);
+    }
+
+    public void RemoveFocus(InteractableObject interactableObject)
+    {
+      var previousTarget = Focused;
+      interactableObject.Highlight = false;
+      focusedObjects.Remove(interactableObject);
+
+      if (Focused != null && previousTarget != interactableObject)
+      {
+        WorldManager.Instance.panel.OpenInteractionPanel(transform.position, Focused.Title,
+          Focused.Description);
+        Focused.Highlight = true;
+      }
+      else if (Focused == null)
+      {
+        WorldManager.Instance.panel.CloseInteractionPanel();
+      }
     }
   }
 }
