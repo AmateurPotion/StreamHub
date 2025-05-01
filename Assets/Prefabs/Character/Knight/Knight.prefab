@@ -165,13 +165,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0256aca6b0c94df09832204c792415dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  title: 
-  description: 
-  onInteract:
-    m_PersistentCalls:
-      m_Calls: []
-  spriteRenderer: {fileID: 377604680679100614}
-  defaultMaterial: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
-  highlightMaterial: {fileID: 2100000, guid: 5e47603d52dfff54281b7f7352fc05c9, type: 2}
   animator: {fileID: 9087277633789998166}
   speed: 2
