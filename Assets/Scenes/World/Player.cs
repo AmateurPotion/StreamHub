@@ -19,9 +19,9 @@ namespace StreamHub.Scenes.World
     public Vector2 direction;
     public HealthBar healthBar;
     public float jumpForce = 100;
+    public new Camera camera;
     [SerializeField] private List<InteractableObject> focusedObjects = new();
     [SerializeField] private Rigidbody2D body;
-    [SerializeField] private new Camera camera;
 
     public float CameraSize
     {
@@ -152,6 +152,11 @@ namespace StreamHub.Scenes.World
       {
         WorldManager.Instance.panel.CloseInteractionPanel();
       }
+    }
+
+    public void ChangeMode()
+    {
+      mode = mode == GravityMode.TopView ? GravityMode.Platform : GravityMode.TopView;
     }
   }
 }

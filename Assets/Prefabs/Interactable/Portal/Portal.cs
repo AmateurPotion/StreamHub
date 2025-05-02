@@ -15,6 +15,7 @@ namespace StreamHub.Prefabs.Interactable.Portal
       base.Interact(player);
 
       player.transform.position = destination;
+      player.camera.transform.position = new Vector3(destination.x, destination.y, player.camera.transform.position.z);
     }
   }
 }
