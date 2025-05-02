@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 408fa24a018048fa9fb677b1cc7434f1, type: 3}
+  m_Name: Test
+  m_EditorClassIdentifier: 
+  wallTile: {fileID: 11400000, guid: ff15598caa1a6634fb9bfa9f38e8afd1, type: 2}
+  floorTile: {fileID: 11400000, guid: e67f6708e720c0d40bfed11b5c47933a, type: 2}
+  airTile: {fileID: 11400000, guid: 9da3b10ca5dae8941a4eff4493b2d854, type: 2}
+  width: 20
+  height: 20
