@@ -8,9 +8,10 @@ namespace StreamHub.Prefabs.Interactable
   {
     [SerializeField] protected string title, description;
     public UnityEvent<Player> onInteract;
+    public bool descriptable = true;
 
-    [SerializeField] private SpriteRenderer spriteRenderer;
-    [SerializeField] private Material defaultMaterial, highlightMaterial;
+    [SerializeField] protected SpriteRenderer spriteRenderer;
+    [SerializeField] protected Material defaultMaterial, highlightMaterial;
 
     public virtual string Title => title;
     public virtual string Description => description;

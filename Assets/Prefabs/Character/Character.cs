@@ -8,6 +8,8 @@ namespace StreamHub.Prefabs.Character
     /// 
     /// </summary>
     public Animator animator;
+
+    public SpriteRenderer spriteRenderer;
     public float speed = 5;
   }
 }

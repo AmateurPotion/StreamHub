@@ -2,19 +2,18 @@ using System.Collections.Generic;
 using StreamHub.Prefabs.Character;
 using StreamHub.Prefabs.Interactable;
 using StreamHub.Scenes.PersonalWorld;
-using StreamHub.Util;
+using StreamHub.World;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace StreamHub.Scenes.World
 {
-  public class Player : MonoBehaviour
+  public class Player : Entity
   {
+    private static readonly int Run = Animator.StringToHash("Run");
+    
     public Character character;
     public Vector2 direction;
-    public float additionalSpeed = 0;
-    [GetSet("Hp")] private int hp = 6;
-    public int maxHp = 6;
 
     public float CameraSize
     {
@@ -25,13 +24,7 @@ namespace StreamHub.Scenes.World
     [SerializeField] private List<InteractableObject> focusedObjects = new();
     [SerializeField] private Rigidbody2D body;
 
-    [SerializeField] [Header("Camera")] private new Camera camera;
-
-    public int Hp
-    {
-      get => hp;
-      set => hp = value < 0 ? 0 : value > maxHp ? maxHp : value;
-    }
+    [SerializeField] private new Camera camera;
 
     public float Speed
     {
@@ -40,15 +33,17 @@ namespace StreamHub.Scenes.World
     }
 
     public InteractableObject Focused => focusedObjects.Count > 0 ? focusedObjects[0] : null;
-    [SerializeField] private CompositeCollider2D collider;
+    [SerializeField] private new CompositeCollider2D collider;
 
     private void Awake()
     {
       collider.GenerateGeometry();
     }
-    
-    private void Update()
+
+    protected override void Update()
     {
+      base.Update();
+      
       if (Input.GetAxis("Mouse ScrollWheel") > 0 && CameraSize < 10) 
         CameraSize = Mathf.Lerp(CameraSize, 10, Time.deltaTime * 5);
       if (Input.GetAxis("Mouse ScrollWheel") < 0 && CameraSize > 2)
@@ -57,17 +52,12 @@ namespace StreamHub.Scenes.World
 
     private void FixedUpdate()
     {
-      var floorMap = WorldManager.Instance.map.Floors;
-      
-      bool canMoveX = floorMap.GetTile(floorMap.WorldToCell(transform.position + new Vector3(direction.x, 0))) != null,
-        canMoveY = floorMap.GetTile(floorMap.WorldToCell(transform.position + new Vector3(0, direction.y))) != null;
-      
-      body.AddForce(new Vector2(canMoveX ? direction.x : 0, 
-          canMoveY ? direction.y : 0) * Speed,
+      body.AddForce(direction * (Speed - slowdown),
         ForceMode2D.Impulse);
-      
-      if(!canMoveX) body.velocity = new Vector2(0, body.velocity.y);
-      if(!canMoveY) body.velocity = new Vector2(body.velocity.x, 0);
+
+      // Set Character-look Direction
+      character.spriteRenderer.flipX =
+        direction.magnitude > 0 ? direction.x < 0 : Input.mousePosition.x < (float)Screen.width / 2;
 
       // Camera Tracking
       camera.transform.position = Vector3.Lerp(camera.transform.position,
@@ -76,7 +66,9 @@ namespace StreamHub.Scenes.World
 
     private void OnMove(InputValue value)
     {
-       direction = value.Get<Vector2>();
+      direction = value.Get<Vector2>();
+
+      character.animator.SetBool(Run, direction.magnitude > 0);
     }
 
     private void OnInteract()
@@ -89,8 +81,9 @@ namespace StreamHub.Scenes.World
       var previousTarget = Focused;
       if (previousTarget != null) previousTarget.Highlight = false;
 
-      WorldManager.Instance.panel.OpenInteractionPanel(transform.position, interactableObject.Title,
-        interactableObject.Description);
+      if (interactableObject.descriptable)
+        WorldManager.Instance.panel.OpenInteractionPanel(transform.position, interactableObject.Title,
+          interactableObject.Description);
       interactableObject.Highlight = true;
       focusedObjects.Add(interactableObject);
     }
@@ -103,8 +96,9 @@ namespace StreamHub.Scenes.World
 
       if (Focused != null && previousTarget != interactableObject)
       {
-        WorldManager.Instance.panel.OpenInteractionPanel(transform.position, Focused.Title,
-          Focused.Description);
+        if (interactableObject.descriptable)
+          WorldManager.Instance.panel.OpenInteractionPanel(transform.position, Focused.Title,
+            Focused.Description);
         Focused.Highlight = true;
       }
       else if (Focused == null)
