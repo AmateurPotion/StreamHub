@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using StreamHub.Prefabs.Character;
 using StreamHub.Prefabs.Interactable;
@@ -11,9 +12,16 @@ namespace StreamHub.Scenes.World
   public class Player : Entity
   {
     private static readonly int Run = Animator.StringToHash("Run");
-    
+    private static readonly int Hit = Animator.StringToHash("Hit");
+
+    public GravityMode mode = GravityMode.TopView;
     public Character character;
     public Vector2 direction;
+    public HealthBar healthBar;
+    public float jumpForce = 100;
+    [SerializeField] private List<InteractableObject> focusedObjects = new();
+    [SerializeField] private Rigidbody2D body;
+    [SerializeField] private new Camera camera;
 
     public float CameraSize
     {
@@ -21,10 +29,25 @@ namespace StreamHub.Scenes.World
       set => camera.orthographicSize = value;
     }
 
-    [SerializeField] private List<InteractableObject> focusedObjects = new();
-    [SerializeField] private Rigidbody2D body;
+    public override int Hp
+    {
+      get => hp;
+      set
+      {
+        hp = value < 0 ? 0 : value > maxHp ? maxHp : value;
+        healthBar.Hp = value;
+      }
+    }
 
-    [SerializeField] private new Camera camera;
+    public override int MaxHp
+    {
+      get => maxHp;
+      set
+      {
+        maxHp = value < 0 ? 0 : value;
+        healthBar.MaxHp = value;
+      }
+    }
 
     public float Speed
     {
@@ -38,22 +61,25 @@ namespace StreamHub.Scenes.World
     private void Awake()
     {
       collider.GenerateGeometry();
+      MaxHp = 6;
+      Hp = 6;
     }
 
     protected override void Update()
     {
       base.Update();
       
-      if (Input.GetAxis("Mouse ScrollWheel") > 0 && CameraSize < 10) 
+      if (Input.GetAxis("Mouse ScrollWheel") < 0 && CameraSize < 10) 
         CameraSize = Mathf.Lerp(CameraSize, 10, Time.deltaTime * 5);
-      if (Input.GetAxis("Mouse ScrollWheel") < 0 && CameraSize > 2)
+      if (Input.GetAxis("Mouse ScrollWheel") > 0 && CameraSize > 2)
         CameraSize = Mathf.Lerp(CameraSize, 2, Time.deltaTime * 5);
     }
 
     private void FixedUpdate()
     {
-      body.AddForce(direction * (Speed - slowdown),
-        ForceMode2D.Impulse);
+      var moveDirection = mode == GravityMode.TopView ? direction : new Vector2(direction.x, 0);
+      body.AddForce(moveDirection * (Speed - slowdown),
+        ForceMode2D.Force);
 
       // Set Character-look Direction
       character.spriteRenderer.flipX =
@@ -74,6 +100,27 @@ namespace StreamHub.Scenes.World
     private void OnInteract()
     {
       if (Focused != null) Focused.Interact(this);
+    }
+
+    public override bool TakeDamage(int damage)
+    {
+      var damaged = base.TakeDamage(damage);
+
+      if (damaged)
+        character.animator.SetTrigger(Hit);
+
+      return damaged;
+    }
+
+    private void OnJump()
+    {
+      if (mode == GravityMode.Platform && Math.Abs(body.velocity.y) < 0.1f)
+        body.AddForce(Vector2.up * jumpForce,
+          ForceMode2D.Impulse);
+    }
+
+    private void OnFire()
+    {
     }
 
     public void AddFocus(InteractableObject interactableObject)

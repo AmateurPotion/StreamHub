@@ -8,7 +8,7 @@ namespace StreamHub.World
   {
     public float additionalSpeed;
     [SerializeField] [GetSet("Hp")] protected int hp = 6;
-    public int maxHp = 6;
+    [SerializeField] [GetSet("MaxHp")] protected int maxHp = 6;
     public float slowdown;
     public float immuneTime = 1;
     [SerializeField] private float immuneTimer;
@@ -21,12 +21,20 @@ namespace StreamHub.World
       set => hp = value < 0 ? 0 : value > maxHp ? maxHp : value;
     }
 
-    public virtual void TakeDamage(int damage)
+    public virtual int MaxHp
     {
-      if (immuneTimer > 0) return;
+      get => maxHp;
+      set => maxHp = value < 0 ? 0 : value;
+    }
+
+    public virtual bool TakeDamage(int damage)
+    {
+      if (immuneTimer > 0) return false;
 
       Hp -= damage;
       immuneTimer = immuneTime;
+
+      return true;
     }
 
     protected virtual void Update()
