@@ -617,7 +617,7 @@ GameObject:
   - component: {fileID: 180821818}
   m_Layer: 0
   m_Name: Interactable
-  m_TagString: Interatable
+  m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3398,7 +3398,7 @@ GameObject:
   - component: {fileID: 761268284}
   m_Layer: 0
   m_Name: Door
-  m_TagString: Interatable
+  m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3871,7 +3871,7 @@ GameObject:
   - component: {fileID: 1057207166}
   m_Layer: 0
   m_Name: FlappyPortal
-  m_TagString: Interatable
+  m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -16931,7 +16931,7 @@ GameObject:
   - component: {fileID: 1341487933}
   m_Layer: 0
   m_Name: StackPortal
-  m_TagString: Interatable
+  m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -17812,7 +17812,7 @@ GameObject:
   - component: {fileID: 1846024694}
   m_Layer: 0
   m_Name: Portal
-  m_TagString: Interatable
+  m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

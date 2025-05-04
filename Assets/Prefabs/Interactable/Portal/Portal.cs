@@ -1,4 +1,4 @@
-using StreamHub.Scenes.World;
+using StreamHub.Scenes.PersonalWorld;
 using UnityEngine;
 
 namespace StreamHub.Prefabs.Interactable.Portal

@@ -2,12 +2,11 @@ using System;
 using System.Collections.Generic;
 using StreamHub.Prefabs.Character;
 using StreamHub.Prefabs.Interactable;
-using StreamHub.Scenes.PersonalWorld;
 using StreamHub.World;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace StreamHub.Scenes.World
+namespace StreamHub.Scenes.PersonalWorld
 {
   public class Player : Entity
   {
