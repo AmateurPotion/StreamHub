@@ -157,6 +157,8 @@ namespace StreamHub.Scenes.World
     public void ChangeMode()
     {
       mode = mode == GravityMode.TopView ? GravityMode.Platform : GravityMode.TopView;
+
+      body.gravityScale = mode == GravityMode.Platform ? 10 : 0;
     }
   }
 }
