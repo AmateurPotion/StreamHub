@@ -21,6 +21,7 @@ namespace StreamHub.Scenes.PersonalWorld
     public new Camera camera;
     [SerializeField] private List<InteractableObject> focusedObjects = new();
     [SerializeField] private Rigidbody2D body;
+    [SerializeField] private Vector3 cameraFocus;
 
     public float CameraSize
     {
@@ -62,6 +63,7 @@ namespace StreamHub.Scenes.PersonalWorld
       collider.GenerateGeometry();
       MaxHp = 6;
       Hp = 6;
+      cameraFocus = new Vector3(transform.position.x, transform.position.y, camera.transform.position.z);;
     }
 
     protected override void Update()
@@ -85,21 +87,76 @@ namespace StreamHub.Scenes.PersonalWorld
         direction.magnitude > 0 ? direction.x < 0 : Input.mousePosition.x < (float)Screen.width / 2;
 
       // Camera Tracking
-      var pos = transform.position;
-      float dx = camera.transform.position.x, dy = camera.transform.position.y;
-
-      dx = CanCameraMove(new Vector3(pos.x > dx ? 1 : 0, 0.5f)) ? pos.x : dx;
-      dy = CanCameraMove(new Vector3(0.5f, pos.y > dy ? 1 : 0)) ? pos.y : dy;
+      cameraFocus = Vector3.Lerp(cameraFocus,
+        new Vector3(transform.position.x, transform.position.y, cameraFocus.z), Time.deltaTime * 5);
       
-      camera.transform.position = Vector3.Lerp(camera.transform.position,
-        new Vector3(dx, dy, camera.transform.position.z), Time.deltaTime * 5);
+      float dx = cameraFocus.x, dy = cameraFocus.y;
+
+      dx = CanCameraMove(new Vector2(cameraFocus.x, 0)) ? dx : camera.transform.position.x;
+      dy = CanCameraMove(new Vector2(0, cameraFocus.y)) ? dy : camera.transform.position.y;
+
+      camera.transform.position = new Vector3(dx, dy, cameraFocus.z);
     }
 
-    private bool CanCameraMove(Vector3 target)
+    private static readonly string[] WallLayer = {"Walls"};
+
+    private bool CanCameraMove(Vector2 target)
     {
-      // Physics2D.Raycast(transform.position, target, out var hit, 100, 1 << LayerMask.NameToLayer("Wall"));
-      var hit = Physics2D.Raycast(transform.position, target, 100, 1 << LayerMask.NameToLayer("Wall"));
-      return true;
+      Vector3 dest1 = new(), dest2 = new(),
+        dir1 = new(), dir2 = new();
+
+      if (target.x == 0)
+      {
+        dir1 = new Vector3(0,1);
+        dir2 = new Vector3(0,-1);
+      }
+
+      if (target.y == 0)
+      {
+        dir1 = new Vector3(1,0);
+        dir2 = new Vector3(-1,0);
+      }
+
+      dest1 = camera.ViewportToWorldPoint(new Vector3(
+        dir1.x switch
+        {
+          0 => 0.5f,
+          -1 => 0,
+          1 => 1,
+          _ => 0.5f
+        },
+        dir1.y switch
+        {
+          0 => 0.5f,
+          -1 => 0,
+          1 => 1,
+          _ => 0.5f
+        }
+        ));
+
+      dest2 = camera.ViewportToWorldPoint(new Vector3(
+        dir2.x switch
+        {
+          0 => 0.5f,
+          -1 => 0,
+           1 => 1,
+          _ => 0.5f
+        },
+        dir2.y switch
+        {
+          0 => 0.5f,
+          -1 => 0,
+           1 => 1,
+          _ => 0.5f
+        }
+        ));
+
+      RaycastHit2D hit1 = Physics2D.Raycast(cameraFocus, dir1, Vector3.Distance(camera.transform.position, dest1),
+        LayerMask.GetMask(WallLayer)),
+        hit2 = Physics2D.Raycast(cameraFocus, dir2, Vector3.Distance(camera.transform.position, dest2),
+          LayerMask.GetMask(WallLayer)) ;
+      
+      return !hit1.collider && !hit2.collider;
     }
 
     private void OnMove(InputValue value)
