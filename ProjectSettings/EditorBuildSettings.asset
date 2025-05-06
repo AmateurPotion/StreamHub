@@ -8,6 +8,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/World/WorldScene.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 1
+    path: Assets/Scenes/PersonalWorld/Stack/StackGameScene.unity
+    guid: c29eb54dfc70cb248b6148a6e3bb21c9
+  - enabled: 1
+    path: Assets/Scenes/PersonalWorld/PersonalWorldScene.unity
+    guid: 2d47894c8cf6ee94eb8cff6255ccd753
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: f15e8e5371299d94c8b0058e12137f87, type: 2}
     com.unity.input.settings: {fileID: 11400000, guid: 9ec59d970e3816b4b989e4ca4059b5db, type: 2}
