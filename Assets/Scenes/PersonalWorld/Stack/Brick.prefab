@@ -148,5 +148,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 0
+  positionFixed: 0
   body: {fileID: 0}
   collider: {fileID: 5902676310793584181}
+  sprite: {fileID: 4959066040973433287}
