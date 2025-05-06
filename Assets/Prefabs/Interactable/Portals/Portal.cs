@@ -1,7 +1,7 @@
 using StreamHub.Scenes.PersonalWorld;
 using UnityEngine;
 
-namespace StreamHub.Prefabs.Interactable.Portal
+namespace StreamHub.Prefabs.Interactable.Portals
 {
   public class Portal : InteractableObject
   {

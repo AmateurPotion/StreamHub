@@ -2,7 +2,7 @@ using StreamHub.Scenes.PersonalWorld;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace StreamHub.Prefabs.Interactable.Portal
+namespace StreamHub.Prefabs.Interactable.Portals
 {
   public class ScenePortal : InteractableObject
   {
