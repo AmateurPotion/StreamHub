@@ -1,6 +1,8 @@
+using StreamHub.Requests;
 using StreamHub.Util;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.Pool;
 using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
@@ -24,6 +26,8 @@ namespace StreamHub.Scenes.PersonalWorld.Stack
 
     [Header("Score")] [SerializeField] [GetSet("Score")]
     private int score;
+
+    private int bestScore;
 
     [SerializeField] private int fixedBrickCount;
     private int bestFixedBrickCount;
@@ -96,6 +100,8 @@ namespace StreamHub.Scenes.PersonalWorld.Stack
         }
 
         #endregion
+
+        bestScore = PlayerPrefs.GetInt("BestScore", 0);
       }
       else
       {
@@ -150,13 +156,28 @@ namespace StreamHub.Scenes.PersonalWorld.Stack
       Time.timeScale = 0;
 
       gameOverPanel.SetActive(true);
-      gameOverText.text = $"Game Over\n점수 : {score}\n블럭 최대 활성화: {bestFixedBrickCount}";
+      bestScore = Mathf.Max(score, bestScore);
+      PlayerPrefs.SetInt("BestScore", bestScore);
+      gameOverText.text = $"Game Over\n최고 점수 : {bestScore}\n점수 : {score}\n블럭 최대 활성화: {bestFixedBrickCount}";
     }
 
     public void Back()
     {
       Time.timeScale = 1;
+
+      SceneManager.sceneLoaded += Message;
+      
       SceneManager.LoadSceneAsync("PersonalWorldScene");
+      return;
+
+      void Message(Scene scene, LoadSceneMode mode)
+      {
+        if (scene.name == "PersonalWorldScene")
+        {
+          EventSystem.current.SendMessage("Request", new DialogRequest("벽돌 쌓기 완료!", $"점수 : {score}"));
+          SceneManager.sceneLoaded -= Message;
+        }
+      }
     }
 
     public void PlaceLine()
@@ -192,7 +213,9 @@ namespace StreamHub.Scenes.PersonalWorld.Stack
     {
       Time.timeScale = 0;
       gameOverPanel.SetActive(true);
-      gameOverText.text = $"Finished!\n점수 : {score}\n블럭 최대 활성화: {bestFixedBrickCount}";
+      bestScore = Mathf.Max(score, bestScore);
+      PlayerPrefs.SetInt("BestScore", bestScore);
+      gameOverText.text = $"Finished!\n최고 점수 : {bestScore}\n점수 : {score}\n블럭 최대 활성화: {bestFixedBrickCount}";
     }
   }
 }
