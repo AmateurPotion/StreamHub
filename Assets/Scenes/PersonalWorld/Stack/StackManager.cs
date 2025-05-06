@@ -105,6 +105,7 @@ namespace StreamHub.Scenes.PersonalWorld.Stack
 
     private void Start()
     {
+      Time.timeScale = 0;
       SpawnLine();
     }
 
@@ -114,6 +115,12 @@ namespace StreamHub.Scenes.PersonalWorld.Stack
       camera.transform.position = Vector3.Lerp(camera.transform.position,
         new Vector3(releasedContainer.position.x, releasedContainer.position.y, camera.transform.position.z),
         Time.deltaTime * 5);
+
+      if (Input.GetKeyDown(KeyCode.Escape) && !pausePanel.activeSelf)
+      {
+        pausePanel.SetActive(true);
+        Time.timeScale = 0;
+      }
     }
 
     public bool left = true;
@@ -154,7 +161,7 @@ namespace StreamHub.Scenes.PersonalWorld.Stack
 
     public void PlaceLine()
     {
-      if (currentLine == null) return;
+      if (currentLine == null || Time.timeScale == 0) return;
 
       if (lineIndex > 3)
         releasedContainer.transform.position = new Vector3(0, lineIndex - 2.5f, 0);
@@ -162,7 +169,30 @@ namespace StreamHub.Scenes.PersonalWorld.Stack
       currentLine.Deconstruct();
       destroyHeight = camera.ScreenToWorldPoint(Vector3.zero).y;
       left = !left;
-      if (Time.timeScale != 0) SpawnLine();
+      SpawnLine();
+    }
+
+    [Header("Description")]
+    [SerializeField] private GameObject descriptionPanel;
+    public void CloseDescriptionPanel()
+    {
+      descriptionPanel.SetActive(false);
+      Time.timeScale = 1;
+    }
+    
+    [Header("Pause")]
+    [SerializeField] private GameObject pausePanel;
+    public void ClosePausePanel()
+    {
+      Time.timeScale = 1;
+      pausePanel.SetActive(false);
+    }
+
+    public void FinishGame()
+    {
+      Time.timeScale = 0;
+      gameOverPanel.SetActive(true);
+      gameOverText.text = $"Finished!\n점수 : {score}\n블럭 최대 활성화: {bestFixedBrickCount}";
     }
   }
 }
