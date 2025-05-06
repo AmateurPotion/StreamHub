@@ -3925,7 +3925,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.018479109, y: 0.3917513}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -3936,7 +3936,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2.648313, y: 2.9809322}
   m_EdgeRadius: 0
 --- !u!114 &1057207166
 MonoBehaviour:
@@ -16985,7 +16985,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.014783144, y: 0.42223644}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -16996,7 +16996,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2.6704879, y: 3.0862522}
   m_EdgeRadius: 0
 --- !u!114 &1341487933
 MonoBehaviour:
@@ -17007,7 +17007,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1341487929}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2f86b7cda5a429bb36680de93b4f639, type: 3}
+  m_Script: {fileID: 11500000, guid: b510c121d1a949dcb9c478858cab0545, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   title: Stack
@@ -17015,24 +17015,12 @@ MonoBehaviour:
     \uC774\uB3D9\uD560 \uC218 \uC788\uC2B5\uB2C8\uB2E4."
   onInteract:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 166969102}
-        m_TargetAssemblyTypeName: StreamHub.Scenes.World.Player, Assembly-CSharp
-        m_MethodName: ChangeMode
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   descriptable: 1
   spriteRenderer: {fileID: 420913661}
   defaultMaterial: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   highlightMaterial: {fileID: 2100000, guid: 832ef7d41f7e07d45ba252e5d3cc0146, type: 2}
-  destination: {x: 3000, y: 2}
+  sceneName: StackGameScene
 --- !u!1 &1484816073
 GameObject:
   m_ObjectHideFlags: 0
