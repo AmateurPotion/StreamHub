@@ -882,7 +882,7 @@ GameObject:
   m_Component:
   - component: {fileID: 264987892}
   - component: {fileID: 264987893}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: StructureGrid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1620,7 +1620,7 @@ GameObject:
   - component: {fileID: 570373056}
   - component: {fileID: 570373058}
   - component: {fileID: 570373057}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Tilemap
   m_TagString: Untagged
   m_Icon: {fileID: 0}

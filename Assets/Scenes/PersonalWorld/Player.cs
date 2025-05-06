@@ -85,8 +85,21 @@ namespace StreamHub.Scenes.PersonalWorld
         direction.magnitude > 0 ? direction.x < 0 : Input.mousePosition.x < (float)Screen.width / 2;
 
       // Camera Tracking
+      var pos = transform.position;
+      float dx = camera.transform.position.x, dy = camera.transform.position.y;
+
+      dx = CanCameraMove(new Vector3(pos.x > dx ? 1 : 0, 0.5f)) ? pos.x : dx;
+      dy = CanCameraMove(new Vector3(0.5f, pos.y > dy ? 1 : 0)) ? pos.y : dy;
+      
       camera.transform.position = Vector3.Lerp(camera.transform.position,
-        new Vector3(transform.position.x, transform.position.y, camera.transform.position.z), Time.deltaTime * 5);
+        new Vector3(dx, dy, camera.transform.position.z), Time.deltaTime * 5);
+    }
+
+    private bool CanCameraMove(Vector3 target)
+    {
+      // Physics2D.Raycast(transform.position, target, out var hit, 100, 1 << LayerMask.NameToLayer("Wall"));
+      var hit = Physics2D.Raycast(transform.position, target, 100, 1 << LayerMask.NameToLayer("Wall"));
+      return true;
     }
 
     private void OnMove(InputValue value)
