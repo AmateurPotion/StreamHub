@@ -1,7 +1,7 @@
 using StreamHub.Scenes.PersonalWorld;
 using UnityEngine;
 
-namespace StreamHub.Prefabs.Interactable.Door
+namespace StreamHub.Prefabs.Interactable.Doors
 {
   public class Door : InteractableObject
   {
