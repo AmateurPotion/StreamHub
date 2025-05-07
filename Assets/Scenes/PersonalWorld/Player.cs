@@ -18,6 +18,7 @@ namespace StreamHub.Scenes.PersonalWorld
     public Vector2 direction;
     public HealthBar healthBar;
     public float jumpForce = 100;
+    public Color color = Color.white;
     public new Camera camera;
     [SerializeField] private List<InteractableObject> focusedObjects = new();
     [SerializeField] private Rigidbody2D body;
@@ -96,6 +97,14 @@ namespace StreamHub.Scenes.PersonalWorld
       dy = CanCameraMove(new Vector2(0, cameraFocus.y)) ? dy : camera.transform.position.y;
 
       camera.transform.position = new Vector3(dx, dy, cameraFocus.z);
+    }
+
+    private void LateUpdate()
+    {
+      if (character.spriteRenderer)
+      {
+        character.spriteRenderer.color = color;
+      }
     }
 
     private static readonly string[] WallLayer = {"Walls"};
