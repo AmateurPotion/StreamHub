@@ -79,6 +79,9 @@ namespace StreamHub.Scenes.PersonalWorld
 
     private void FixedUpdate()
     {
+      // 대화창이 열려있을시 이동불가
+      if(WorldManager.Instance.panel.IsConversationOpen) return;
+      
       var moveDirection = mode == GravityMode.TopView ? direction : new Vector2(direction.x, 0);
       body.AddForce(moveDirection * (Speed - slowdown),
         ForceMode2D.Force);

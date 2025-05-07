@@ -1,5 +1,9 @@
+using System.Collections.Generic;
+using StreamHub.Contents;
+using StreamHub.Prefabs.Interactable.NPC;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace StreamHub.Scenes.PersonalWorld
 {
@@ -23,6 +27,31 @@ namespace StreamHub.Scenes.PersonalWorld
       interactionTitle.text = "";
       interactionDescription.text = "";
       interactionPanel.SetActive(false);
+    }
+
+    [Header("Conversation")] [SerializeField]
+    private GameObject conversationPanel;
+
+    [SerializeField] private TMP_Text conversationTitle, conversationDescription;
+    public List<ConversationFlow> currentFlows;
+    public NonePlayableCharacter currentCharacter = null;
+    public bool IsConversationOpen => conversationPanel.activeSelf;
+
+    public void OpenConversationPanel(Conversation conversation, NonePlayableCharacter character = null)
+    {
+      currentFlows = new List<ConversationFlow>(conversation.flows);
+      currentCharacter = character;
+      conversationPanel.SetActive(true);
+      NextFlow();
+    }
+
+    public void NextFlow()
+    {
+      var flow = currentFlows[0];
+      currentFlows.RemoveAt(0);
+      
+      conversationTitle.text = flow.title;
+      conversationDescription.text = flow.description;
     }
   }
 }
